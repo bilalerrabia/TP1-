@@ -1,128 +1,70 @@
-### README: Classification avec un Arbre de Décision - "Jouer au Tennis"
 
----
+# Modèle de Régression Logistique avec Perceptron
 
-#### **Aperçu du Projet**
-Ce projet utilise un **arbre de décision** pour prédire si une partie de tennis sera jouée ou non en fonction de facteurs météorologiques comme les prévisions, la température, l'humidité et le vent. Le modèle est construit avec la bibliothèque **Scikit-learn** et inclut une évaluation complète des performances du modèle.
+Ce projet implémente un modèle de régression logistique pour la classification binaire en utilisant un perceptron. Le modèle est construit à partir de fonctions essentielles comme l'initialisation des paramètres, le calcul des prédictions, la fonction de coût, les gradients, et la mise à jour des paramètres. Ensuite, un modèle complet est créé avec les fonctions pour l'entraînement et la prédiction.
 
----
+## Description
 
-#### **Caractéristiques**
-- Construction et entraînement d’un arbre de décision basé sur le critère **entropie**.
-- Encodage des données catégoriques pour l’utilisation dans un modèle de machine learning.
-- Évaluation du modèle avec :
-  - **Précision (Accuracy)**,
-  - **Rappel (Recall)**,
-  - **F1-score**.
-- Visualisation de :
-  - L’arbre de décision,
-  - La matrice de confusion.
-- Analyse des performances en fonction de la profondeur maximale de l'arbre.
+Le programme exécute les étapes suivantes :
 
----
+1. **Initialisation des paramètres** :
+   Les poids (W) et le biais (b) sont initialisés de manière aléatoire.
 
-#### **Données**
-Les données utilisées sont un ensemble fictif représentant les conditions météorologiques et leur influence sur la décision de jouer ou non au tennis.
+2. **Modèle de prédiction** :
+   Un modèle linéaire z = W^T X + b est utilisé, suivi d'une fonction sigmoïde pour obtenir la probabilité d'appartenance à la classe positive.
 
-- **Colonnes** :
-  - `Prévisions`: Ensoleillé, Nuageux, Pluie
-  - `Température`: Chaud, Moyen, Frais
-  - `Humidité`: Haute, Normale
-  - `Vent`: Oui, Non
-  - `Jouer`: Oui (jouer) ou Non (ne pas jouer)
+3. **Calcul du coût** :
+   La fonction de coût utilisée est la log-loss, qui mesure la différence entre les prédictions et les étiquettes réelles.
 
-Exemple de données :
-| Prévisions  | Température | Humidité | Vent | Jouer |
-|-------------|-------------|----------|------|-------|
-| Ensoleillé  | Chaud       | Haute    | Non  | Non   |
-| Pluie       | Frais       | Normale  | Oui  | Non   |
+4. **Calcul des gradients** :
+   Les gradients sont calculés pour les poids et le biais afin de minimiser la fonction de coût pendant l'entraînement.
 
----
+5. **Mise à jour des paramètres** :
+   Les poids et le biais sont mis à jour à l'aide de la descente de gradient avec un taux d'apprentissage (α) spécifié.
 
-#### **Prérequis**
-- **Python 3.7+**
-- Bibliothèques Python :
-  - `scikit-learn`
-  - `pandas`
-  - `matplotlib`
+6. **Entraînement du modèle** :
+   Le modèle est entraîné pour un nombre d'itérations donné, et le coût est calculé et affiché à chaque itération.
 
-Installation des bibliothèques nécessaires :
+7. **Prédiction et évaluation** :
+   Après l'entraînement, le modèle prédit les classes des nouveaux exemples et calcule l'accuracy (précision) en comparant les prédictions aux étiquettes réelles.
+
+8. **Visualisation** :
+   - Les données d'entraînement et les nouvelles données sont affichées dans un graphique.
+   - La frontière de décision est tracée pour montrer la séparation entre les classes.
+
+## Structure du Code
+
+- **Fonction `initialisation(X)`** : Initialise les poids W et le biais b de manière aléatoire.
+- **Fonction `model(X, W, b)`** : Calcule la sortie du modèle en appliquant la fonction sigmoïde à la combinaison linéaire des entrées et des paramètres.
+- **Fonction `log_loss(A, y)`** : Calcule la fonction de coût, qui est la log-loss.
+- **Fonction `gradients(A, X, y)`** : Calcule les gradients des poids et du biais.
+- **Fonction `update(W, b, dW, db, alpha)`** : Met à jour les poids et le biais en utilisant les gradients et un taux d'apprentissage.
+- **Fonction `predict(X, W, b)`** : Prédit la classe des exemples en renvoyant 1 si la probabilité est supérieure ou égale à 0.5, sinon 0.
+- **Classe `ArtificialNeurons`** : Combine toutes les fonctions ci-dessus pour entraîner un modèle de neurone artificiel avec une descente de gradient et prédire les résultats.
+
+## Installation
+
+1. Clone ce repository ou télécharge le fichier Python contenant le code.
+2. Assure-toi d'avoir Python 3.x installé ainsi que les bibliothèques suivantes :
+   - numpy
+   - matplotlib
+   - scikit-learn
+
+Tu peux installer les dépendances nécessaires avec pip :
 ```bash
-pip install scikit-learn pandas matplotlib
+pip install numpy matplotlib scikit-learn
 ```
 
----
+## Exécution
 
-#### **Instructions**
-1. **Exécuter le script** :
-   Lancez le fichier Python pour exécuter le programme :
-   ```bash
-   python <nom_du_fichier>.py
-   ```
+1. Exécute le script Python après avoir défini les données d'entrée et les paramètres comme le taux d'apprentissage (α) et le nombre d'itérations (n_iter).
+2. Les erreurs, la précision (accuracy) et la frontière de décision seront affichées sur un graphique.
+3. Tu peux tester la prédiction du modèle sur de nouveaux exemples de données et visualiser la performance du modèle.
 
-2. **Étapes du programme** :
-   - **Encodage des données** : Transformation des variables catégoriques en données numériques à l'aide de `pd.get_dummies`.
-   - **Construction du modèle** : Entraînement d’un arbre de décision avec un ensemble d’entraînement.
-   - **Évaluation du modèle** :
-     - Affichage des métriques comme la précision, le rappel et le F1-score.
-     - Visualisation de l’arbre de décision et de la matrice de confusion.
-   - **Analyse de la profondeur de l'arbre** : Étude des performances du modèle pour différentes profondeurs maximales.
+## Résultats attendus
 
-3. **Résultats** :
-   - **Arbre de décision** : Une représentation visuelle de l’arbre est affichée.
-   - **Matrice de confusion** : Permet de comprendre les erreurs du modèle.
-   - **Performance globale** : Les métriques sont affichées dans la console.
-
----
-
-#### **Fonctionnalités clés**
-- **Construction de l'arbre** :
-  L’arbre de décision est construit à l’aide de `DecisionTreeClassifier` avec le critère `entropy`.
-  
-- **Visualisation** :
-  - Affichage de l’arbre avec `plot_tree`.
-  - Matrice de confusion avec `ConfusionMatrixDisplay`.
-
-- **Métriques** :
-  - **Précision (Accuracy)** : Mesure de la proportion des prédictions correctes.
-  - **Rappel (Recall)** : Proportion des cas positifs correctement identifiés.
-  - **F1-score** : Moyenne harmonique entre précision et rappel.
-
----
-
-#### **Personnalisation**
-- Vous pouvez modifier la profondeur maximale de l’arbre pour tester ses performances (section de code `for depth in range(1, 6)`).
-- Remplacez ou ajoutez des données dans l'ensemble pour tester le modèle avec différents scénarios.
-
----
-
-#### **Exemple de Résultats**
-1. **Précision sur l'ensemble de test** :
-   ```
-   Précision sur l'ensemble de test : 100.00%
-   ```
-
-2. **Arbre de décision** (exemple en texte) :
-   ```
-   |--- Humidité_Normale <= 0.50
-   |   |--- Température_Frais <= 0.50
-   |   |   |--- classe: Non
-   |--- classe: Oui
-   ```
-
-3. **Métriques** :
-   ```
-   Taux de reconnaissance (accuracy) : 100.00%
-   Rappel (Recall) : 1.00
-   F1-Score : 1.00
-   ```
-
----
-
-#### **Améliorations possibles**
-- Ajouter d'autres algorithmes de classification pour comparer les performances (ex. : SVM, KNN).
-- Implémenter une validation croisée pour une évaluation plus robuste.
-- Étendre les données pour inclure des cas plus variés.
-
----
+- Le coût (log-loss) au fil des itérations.
+- La précision du modèle (accuracy) sur l'ensemble d'entraînement.
+- Un graphique montrant la séparation des classes et les nouvelles données ajoutées.
+- Une frontière de décision tracée entre les deux classes.
 
