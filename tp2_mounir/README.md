@@ -8,27 +8,27 @@ Ce projet implémente un modèle de régression logistique pour la classificatio
 Le programme exécute les étapes suivantes :
 
 1. **Initialisation des paramètres** :
-   Les poids (W) et le biais (b) sont initialisés de manière aléatoire.
-
-2. **Modèle de prédiction** :
+   Les poids (W) et le biais (b) sont initialisés de manière aléatoire. ![Texte alternatif](1.png) ![Texte alternatif](3.png)
+ ![Texte alternatif](2.png)
+3. **Modèle de prédiction** :
    Un modèle linéaire z = W^T X + b est utilisé, suivi d'une fonction sigmoïde pour obtenir la probabilité d'appartenance à la classe positive.
-
-3. **Calcul du coût** :
+ ![Texte alternatif](5.png)
+4. **Calcul du coût** :
    La fonction de coût utilisée est la log-loss, qui mesure la différence entre les prédictions et les étiquettes réelles.
-
-4. **Calcul des gradients** :
+ ![Texte alternatif](photos/6.png)
+5. **Calcul des gradients** :
    Les gradients sont calculés pour les poids et le biais afin de minimiser la fonction de coût pendant l'entraînement.
 
-5. **Mise à jour des paramètres** :
+6. **Mise à jour des paramètres** :
    Les poids et le biais sont mis à jour à l'aide de la descente de gradient avec un taux d'apprentissage (α) spécifié.
 
-6. **Entraînement du modèle** :
+7. **Entraînement du modèle** :
    Le modèle est entraîné pour un nombre d'itérations donné, et le coût est calculé et affiché à chaque itération.
 
-7. **Prédiction et évaluation** :
+8. **Prédiction et évaluation** :
    Après l'entraînement, le modèle prédit les classes des nouveaux exemples et calcule l'accuracy (précision) en comparant les prédictions aux étiquettes réelles.
 
-8. **Visualisation** :
+9. **Visualisation** :
    - Les données d'entraînement et les nouvelles données sont affichées dans un graphique.
    - La frontière de décision est tracée pour montrer la séparation entre les classes.
 
